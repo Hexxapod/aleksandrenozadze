@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+</head>
+<body>
+  <h1>{{title}}</h1>
+
+  <div *ngFor="let user of users">
+    <p *ngIf="user.age>20">{{user.firstname}}{{user.lastname}}, {{user.age}}</p>
+  </div>
+  <h1>Array from parent component</h1>
+<div *ngFor="let user of ParentUser">
+  <p>{{ user.firstname }} {{ user.lastname }}</p>
+</div>
+<form>
+<div class="form-group">
+  <label for="firstname">First Name</label>
+  <input
+    type="text"
+    id="firstname"
+    formControlName="firstname"
+    class="form-control"
+    [ngClass]="{'is-invalid': userForm.get('firstname').invalid && userForm.get('firstname').touched}"
+  />
+  <div *ngIf="userForm.get('firstname').invalid && userForm.get('firstname').touched" class="invalid-feedback">
+    <span *ngIf="userForm.get('firstname').errors.required">First Name is required.</span>
+    <span *ngIf="userForm.get('firstname').errors.minlength">First Name must be at least 3 characters long.</span>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="lastname">Last Name</label>
+  <input
+    type="text"
+    id="lastname"
+    formControlName="lastname"
+    class="form-control"
+    [ngClass]="{'is-invalid': userForm.get('lastname').invalid && userForm.get('lastname').touched}"
+  />
+  <div *ngIf="userForm.get('lastname').invalid && userForm.get('lastname').touched" class="invalid-feedback">
+    <span *ngIf="userForm.get('lastname').errors.required">Last Name is required.</span>
+    <span *ngIf="userForm.get('lastname').errors.minlength">Last Name must be at least 3 characters long.</span>
+  </div>
+</div>
+
+
+<div class="form-group">
+  <label for="phoneNumber">Phone Number</label>
+  <input
+    type="text"
+    id="phoneNumber"
+    formControlName="phoneNumber"
+    class="form-control"
+    [ngClass]="{'is-invalid': userForm.get('phoneNumber').invalid && userForm.get('phoneNumber').touched}"
+  />
+  <div *ngIf="userForm.get('phoneNumber').invalid && userForm.get('phoneNumber').touched" class="invalid-feedback">
+    <span *ngIf="userForm.get('phoneNumber').errors.required">Phone Number is required.</span>
+    <span *ngIf="userForm.get('phoneNumber').errors.minlength">Phone Number must be at least 9 characters long.</span>
+  </div>
+</div>
+
+<div class="form-group">
+  <label for="email">Email</label>
+  <input
+    type="email"
+    id="email"
+    formControlName="email"
+    class="form-control"
+    [ngClass]="{'is-invalid': userForm.get('email').invalid && userForm.get('email').touched}"
+  />
+  <div *ngIf="userForm.get('email').invalid && userForm.get('email').touched" class="invalid-feedback">
+    <span *ngIf="userForm.get('email').errors.required">Email is required.</span>
+    <span *ngIf="userForm.get('email').errors.minlength">Email must be at least 8 characters long.</span>
+  </div>
+</div>
+
+
+<button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Submit</button>
+</form>
+<button (click)="displayUsers()">Display Users</button>
+</body>
+</html>
